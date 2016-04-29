@@ -24,7 +24,7 @@
             this.bird = this.game.add.sprite(100, 255, 'bird', 0);
             this.game.physics.enable(this.bird);
             this.bird.body.gravity.y = 1000;
-
+            this.game.input.onDown.add(this.jump, this);
             var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
             spaceKey.onDown.add(this.jump, this);
         }
