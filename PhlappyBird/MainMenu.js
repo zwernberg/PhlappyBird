@@ -18,8 +18,8 @@ var PhlappyBird;
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.game.stage.backgroundColor = '#71c5cf';
             this.score = 0;
-            this.labelScore = this.game.add.text(20, 20, "0", { font: "30px Arial", fill: "#ffffff" });
-            this.labelHighScore = this.game.add.text(640, 20, "0", { font: "30px Arial", fill: "#ffffff" });
+            this.highscore = this.getHighscore();
+            this.labelScore = this.game.add.text(20, 20, "Score: " + this.score + "\nBest: " + this.highscore, { font: "30px Arial", fill: "#ffffff" });
             this.pipes = this.game.add.group();
             this.timer = this.game.time.events.loop(1500, this.addRowOfPipes, this);
             this.bird = this.game.add.sprite(100, 255, 'bird', 0);
@@ -48,8 +48,7 @@ var PhlappyBird;
         };
         MainMenu.prototype.addRowOfPipes = function () {
             var hole = (Math.floor(Math.random() * 5) + 1);
-            this.score += 1;
-            this.labelScore.text = String(this.score);
+            this.updateScore();
             for (var i = 0; i < 8; i++) {
                 if (i != hole && i != hole + 1 && i != hole - 1) {
                     this.addPipe(400, i * 60 + 10);
@@ -57,7 +56,15 @@ var PhlappyBird;
             }
         };
         MainMenu.prototype.restartGame = function () {
+            localStorage.setItem("Highscore", String(Math.max(this.score, this.highscore)));
             this.game.state.start('MainMenu');
+        };
+        MainMenu.prototype.updateScore = function () {
+            this.score += 1;
+            this.labelScore.text = "Score: " + this.score + "\nBest: " + this.highscore;
+        };
+        MainMenu.prototype.getHighscore = function () {
+            return localStorage.getItem("Highscore") == null ? 0 : localStorage.getItem("Highscore");
         };
         return MainMenu;
     })(Phaser.State);
