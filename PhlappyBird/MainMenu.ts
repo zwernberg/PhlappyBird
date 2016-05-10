@@ -5,6 +5,7 @@
         timer: Phaser.TimerEvent;
         score: number;
         labelScore: Phaser.Text;
+        labelHighScore: Phaser.Text;
 
         preload() {
             this.game.load.image('bird', 'assets/bird.png');
@@ -17,6 +18,10 @@
             this.score = 0;
             this.labelScore = this.game.add.text(20, 20, "0",
                 { font: "30px Arial", fill: "#ffffff" });   
+
+            this.labelHighScore = this.game.add.text(640, 20, "0",
+                { font: "30px Arial", fill: "#ffffff" });   
+
 
             this.pipes = this.game.add.group();
             this.timer = this.game.time.events.loop(1500, this.addRowOfPipes, this); 

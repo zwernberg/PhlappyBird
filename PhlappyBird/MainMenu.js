@@ -19,6 +19,7 @@ var PhlappyBird;
             this.game.stage.backgroundColor = '#71c5cf';
             this.score = 0;
             this.labelScore = this.game.add.text(20, 20, "0", { font: "30px Arial", fill: "#ffffff" });
+            this.labelHighScore = this.game.add.text(640, 20, "0", { font: "30px Arial", fill: "#ffffff" });
             this.pipes = this.game.add.group();
             this.timer = this.game.time.events.loop(1500, this.addRowOfPipes, this);
             this.bird = this.game.add.sprite(100, 255, 'bird', 0);
