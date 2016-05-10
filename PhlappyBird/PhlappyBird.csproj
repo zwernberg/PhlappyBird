@@ -93,4 +93,16 @@
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /y $(ProjectDir)index.html $(SolutionDir)
+xcopy /y $(ProjectDir)phaser.js $(SolutionDir)
+xcopy /y $(ProjectDir)game.js $(SolutionDir)
+xcopy /y $(ProjectDir)app.js $(SolutionDir)
+xcopy /y $(ProjectDir)app.css $(SolutionDir)
+xcopy /y /s $(ProjectDir)assets $(SolutionDir)\assets</PostBuildEvent>
+  </PropertyGroup>
 </Project>
